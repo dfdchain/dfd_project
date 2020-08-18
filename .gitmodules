@@ -1,6 +1,3 @@
-[submodule "openssl"]
-	path = openssl
-	url = https://github.com/dfdchain/openssl
 [submodule "miniupnp"]
 	path = miniupnp
 	url = https://github.com/dfdchain/miniupnp
@@ -10,3 +7,7 @@
 [submodule "fc"]
 	path = fc
 	url = https://github.com/dfdchain/fc
+
+[submodule "openssl"]
+	path = openssl
+	url = https://github.com/dfdchain/openssl
