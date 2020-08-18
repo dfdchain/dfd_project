@@ -1,0 +1,12 @@
+[submodule "openssl"]
+	path = openssl
+	url = https://github.com/dfdchain/openssl
+[submodule "miniupnp"]
+	path = miniupnp
+	url = https://github.com/dfdchain/miniupnp
+[submodule "leveldb"]
+	path = leveldb
+	url = https://github.com/dfdchain/leveldb
+[submodule "fc"]
+	path = fc
+	url = https://github.com/dfdchain/fc
