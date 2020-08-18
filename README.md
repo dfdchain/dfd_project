@@ -1,7 +1,7 @@
 # How to build dfd_project in Ubuntu 16.04
 
 
-### Install dependencies:
+### Install dependencies
 
 ```
 sudo apt-get update
