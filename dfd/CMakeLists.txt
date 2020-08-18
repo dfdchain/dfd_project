@@ -1,3 +1,5 @@
+add_subdirectory(uvm)
+
 AUX_SOURCE_DIRECTORY(src/api API_SRC)
 AUX_SOURCE_DIRECTORY(src/client CLIENT_SRC)
 AUX_SOURCE_DIRECTORY(src/console CONSOLE_SRC)
@@ -36,7 +38,7 @@ set(Boost_USE_STATIC_RUNTIME  ON)
 # Specify Boost libraries that will use.
 FIND_PACKAGE( Boost REQUIRED COMPONENTS system program_options chrono context coroutine date_time exception filesystem iostreams locale thread )
 
-set(CMAKE_CXX_FLAGS "-std=c++11 -DDFD_GLOBAL_API_LOG=1 -DDFD_TEST_NETWORK" )
+set(CMAKE_CXX_FLAGS "-std=c++11 -DDFD_GLOBAL_API_LOG=1" )
 set(Boost_INCLUDE_DIR　"/usr/include/boost")
 set(Boost_LIBRARY_DIR  "/usr/lib/x86_64-linux-gnu")
 
@@ -80,6 +82,6 @@ add_library(blockchain ${API_SRC} ${CLIENT_SRC} ${CONSOLE_SRC} ${DB_SRC} ${NETWO
 )
 
 
-add_executable(dfd-test ${SOURCE_FILES})
+add_executable(dfd ${SOURCE_FILES})
 
-TARGET_LINK_LIBRARIES(dfd-test blockchain libuvm.a libfc.a libsecp256k1.a libleveldb.a libminiupnpc.a ${Boost_LIBRARIES} libcrypto.a dl)
+TARGET_LINK_LIBRARIES(dfd blockchain libuvm.a libfc.a libsecp256k1.a libleveldb.a libminiupnpc.a ${Boost_LIBRARIES} libcrypto.a dl)
