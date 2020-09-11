@@ -38,7 +38,7 @@ set(Boost_USE_STATIC_RUNTIME  ON)
 # Specify Boost libraries that will use.
 FIND_PACKAGE( Boost REQUIRED COMPONENTS system program_options chrono context coroutine date_time exception filesystem iostreams locale thread )
 
-set(CMAKE_CXX_FLAGS "-std=c++11 -DDFD_GLOBAL_API_LOG=1" )
+set(CMAKE_CXX_FLAGS "-std=c++11 -O2 -pthread -DDFD_GLOBAL_API_LOG=1" )
 set(Boost_INCLUDE_DIR　"/usr/include/boost")
 set(Boost_LIBRARY_DIR  "/usr/lib/x86_64-linux-gnu")
 
