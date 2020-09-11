@@ -1645,9 +1645,9 @@ namespace dfdcore {
                 client_version = client_version.substr(pos + 1);
 #ifdef DFD_TEST_NETWORK
             //client_version += "-testnet-" + std::to_string(DFD_TEST_NETWORK_VERSION);
-			client_version += "-testnet-1.0.4";
+			client_version += "-testnet-1.0.5";
 #else
-			client_version += "-1.0.4";
+			client_version += "-1.0.5";
 #endif
 
             fc::mutable_variant_object info;
