@@ -463,6 +463,7 @@ namespace dfdcore {
                     {
                         BlockForkData entry = _fork_db.fetch(next_id);
                         entry.is_linked = true;
+						entry.is_valid = true;
                         pending.insert(entry.next_blocks.begin(), entry.next_blocks.end());
                         //ilog( "store: ${id} => ${data}", ("id",next_id)("data",entry) );
                         _fork_db.store(next_id, entry);
