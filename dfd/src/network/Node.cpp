@@ -7,6 +7,7 @@
 #include <iostream>
 #include <algorithm>
 #include <tuple>
+#include <atomic>
 #include <boost/tuple/tuple.hpp>
 #include <boost/circular_buffer.hpp>
 
@@ -96,6 +97,9 @@
 #endif
 
 namespace dfdcore {
+
+	extern std::atomic<bool> g_disconnect_all_peers;
+
     namespace network {
 
         namespace detail
@@ -1289,6 +1293,26 @@ namespace dfdcore {
                 std::list<PeerConnectionPtr> peers_to_disconnect_forcibly;
                 std::list<PeerConnectionPtr> peers_to_send_keep_alive;
                 std::list<PeerConnectionPtr> peers_to_terminate;
+
+				bool b = g_disconnect_all_peers.load(std::memory_order_relaxed);
+				if (b) {
+					for (const PeerConnectionPtr& active_peer : _active_connections)
+					{
+						peers_to_disconnect_forcibly.push_back(active_peer);
+					}
+
+					for (const PeerConnectionPtr& active_peer : peers_to_disconnect_forcibly)
+					{
+						wlog("Disconnecting peer ${peer} because of [g_disconnect_all_peers]",
+							("peer", active_peer->get_remote_endpoint()));
+						move_peer_to_terminating_list(active_peer);
+						active_peer->close_connection();
+					}
+					peers_to_disconnect_forcibly.clear();
+
+					g_disconnect_all_peers.store(false, std::memory_order_relaxed);
+					return;
+				}
 
                 // Disconnect peers that haven't sent us any data recently
                 // These numbers are just guesses and we need to think through how this works better.

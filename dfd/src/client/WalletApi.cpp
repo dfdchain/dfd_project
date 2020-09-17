@@ -563,6 +563,8 @@ namespace dfdcore {
                 const string& label,
                 int legacy_network_byte)
             {
+				FC_ASSERT(false, "wallet_address_create is deprecated");
+
                 // set limit in  simulator state
                 if (_chain_db->get_is_in_simulator())
                     FC_THROW_EXCEPTION(simulator_command_forbidden, "in simulator, this command is forbidden, you cannot call it!");

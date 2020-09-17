@@ -25,6 +25,9 @@
 #include <thread>
 #include <consensus/operation/ContractOperations.hpp>
 namespace dfdcore {
+
+	std::atomic<bool> g_disconnect_all_peers(false);
+
     namespace consensus {
 
         const static short MAX_RECENT_OPERATIONS = 20;
@@ -580,6 +583,9 @@ namespace dfdcore {
                     {
                         elog("           we don't know about its previous: ${p}", ("p", block_data.previous));
                         prev_fork_data.is_linked = false; //this is only a placeholder, we don't know what its previous block is, so it can't be linked
+
+						g_disconnect_all_peers.store(true, std::memory_order_relaxed);
+						elog("           set g_disconnect_all_peers true ......");
                     }
                     prev_fork_data.next_blocks.insert(block_id);
                     _fork_db.store(block_data.previous, prev_fork_data);
